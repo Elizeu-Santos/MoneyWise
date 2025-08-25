@@ -48,3 +48,22 @@ export const Total = styled.span`
   font-size: 30px;
   font-weight: bold;
 `;
+
+export const IconWrapper = styled.div`
+  svg {
+    width: 25px;
+    height: 25px;
+    color: ${({ type }) => {
+      switch (type) {
+        case 'entrada':
+          return '#2ecc71'; 
+        case 'saida':
+          return '#e74c3c'; 
+        case 'total':
+          return '#3498db'; 
+        default:
+          return '#3498db'; 
+      }
+    }};
+  }
+`;
