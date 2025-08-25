@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import GridItem from "../GridItem";
 import * as C from "./styles";
+import { useTranslation } from "../../i18n";
 
 const Grid = ({ itens, setItens }) => {
   const [visibleItems, setVisibleItems] = useState(10);
+  const { t } = useTranslation();
 
   const onDelete = (ID) => {
     const newArray = itens.filter((transaction) => transaction.id !== ID);
@@ -23,10 +25,10 @@ const Grid = ({ itens, setItens }) => {
       <C.Table>
         <C.Thead>
           <C.Tr>
-            <C.Th width={40}>Descrição</C.Th>
-            <C.Th width={40}>Valor</C.Th>
+            <C.Th width={40}>{t("grid.description")}</C.Th>
+            <C.Th width={40}>{t("grid.amount")}</C.Th>
             <C.Th width={10} alignCenter>
-              Tipo
+              {t("grid.type")}
             </C.Th>
             <C.Th width={10}></C.Th>
           </C.Tr>
@@ -41,7 +43,7 @@ const Grid = ({ itens, setItens }) => {
       {hasMoreItems && (
         <C.LoadMoreContainer>
           <C.LoadMoreButton onClick={loadMoreItems}>
-            Ver mais ({itens.length - visibleItems} restantes)
+            {t("grid.more")} ({itens.length - visibleItems} {t("grid.remaining")})
           </C.LoadMoreButton>
         </C.LoadMoreContainer>
       )}

@@ -15,10 +15,24 @@ export const HeaderContent = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
 `;
 
 export const LogoSection = styled.div`
-  text-align: left;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    order: 1;
+  }
 `;
 
 export const Title = styled.h1`
@@ -31,6 +45,10 @@ export const Title = styled.h1`
   @media (max-width: 768px) {
     font-size: 2rem;
   }
+  
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const Subtitle = styled.p`
@@ -38,18 +56,61 @@ export const Subtitle = styled.p`
   font-size: 1rem;
   margin: 5px 0 0 0;
   font-weight: 300;
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const UserSection = styled.div`
   display: flex;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    order: 2;
+  }
+`;
+
+export const ActionsRight = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const LangButton = styled.button`
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 20px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
 `;
 
 export const ProfileContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    gap: 14px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 12px;
+  }
 `;
 
 export const ProfilePhotoContainer = styled.div`
@@ -72,6 +133,16 @@ export const ProfilePhoto = styled.img`
     border-color: rgba(255, 255, 255, 0.6);
     transform: scale(1.05);
   }
+  
+  @media (max-width: 768px) {
+    width: 70px;
+    height: 70px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 60px;
+    height: 60px;
+  }
 `;
 
 export const DefaultProfilePhoto = styled.div`
@@ -90,6 +161,16 @@ export const DefaultProfilePhoto = styled.div`
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.6);
     transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    width: 70px;
+    height: 70px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 60px;
+    height: 60px;
   }
 `;
 
@@ -113,10 +194,22 @@ export const PhotoUploadButton = styled.label`
     background: #45a049;
     transform: scale(1.1);
   }
+  
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 22px;
+    height: 22px;
+  }
 `;
 
 export const UserInfo = styled.div`
-  text-align: center;
+  text-align: left;
+  display: flex;
+  align-items: center;
 `;
 
 export const UserName = styled.div`
@@ -133,6 +226,16 @@ export const UserName = styled.div`
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 5px 10px;
   }
 `;
 
@@ -155,32 +258,14 @@ export const NameInput = styled.input`
   &:focus {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
   }
-`;
-
-// Responsividade para dispositivos móveis
-export const MobileContainer = styled.div`
+  
   @media (max-width: 768px) {
-    ${HeaderContent} {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    ${LogoSection} {
-      text-align: center;
-    }
-    
-    ${Title} {
-      font-size: 2rem;
-    }
-    
-    ${ProfilePhoto}, ${DefaultProfilePhoto} {
-      width: 70px;
-      height: 70px;
-    }
-    
-    ${PhotoUploadButton} {
-      width: 24px;
-      height: 24px;
-    }
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 5px 10px;
   }
 `;

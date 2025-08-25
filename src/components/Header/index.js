@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as C from "./styles";
 import { FaUser, FaCamera } from "react-icons/fa";
+import { useTranslation } from "../../i18n";
 
 const Header = () => {
     const [userName, setUserName] = useState("");
@@ -40,14 +41,11 @@ const Header = () => {
         }
     };
 
+    const { t, setLocale, locale } = useTranslation();
+
     return (
         <C.Container>
             <C.HeaderContent>
-                <C.LogoSection>
-                    <C.Title>MoneyWise</C.Title>
-                    <C.Subtitle>Controle suas finanças de forma inteligente</C.Subtitle>
-                </C.LogoSection>
-                
                 <C.UserSection>
                     <C.ProfileContainer>
                         <C.ProfilePhotoContainer>
@@ -77,17 +75,29 @@ const Header = () => {
                                     onChange={(e) => setUserName(e.target.value)}
                                     onKeyPress={handleKeyPress}
                                     onBlur={handleNameSave}
-                                    placeholder="Digite seu nome"
+                                    placeholder={t("header.nameInputPlaceholder")}
                                     autoFocus
                                 />
                             ) : (
                                 <C.UserName onClick={() => setIsEditing(true)}>
-                                    {userName || "Clique para adicionar seu nome"}
+                                    {userName || t("header.namePlaceholder")}
                                 </C.UserName>
                             )}
                         </C.UserInfo>
                     </C.ProfileContainer>
                 </C.UserSection>
+                
+                <C.LogoSection>
+                    <C.Title>{t("header.title")}</C.Title>
+                    <C.Subtitle>{t("header.subtitle")}</C.Subtitle>
+                </C.LogoSection>
+
+                <C.ActionsRight>
+                    <C.LangButton onClick={() => setLocale("pt-BR")} title="Português (Brasil)">🇧🇷</C.LangButton>
+                    <C.LangButton onClick={() => setLocale("en")} title="English (US)">🇺🇸</C.LangButton>
+                    <C.LangButton onClick={() => setLocale("es")} title="Español">🇪🇸</C.LangButton>
+                    <C.LangButton onClick={() => setLocale("fr")} title="Français">🇫🇷</C.LangButton>
+                </C.ActionsRight>
             </C.HeaderContent>
         </C.Container>
     );

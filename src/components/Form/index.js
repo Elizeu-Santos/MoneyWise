@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Grid from "../Grid";
 import * as C from "./styles";
+import { useTranslation } from "../../i18n";
 
 const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
   const [desc, setDesc] = useState("");
@@ -9,13 +10,14 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
   const [isExpense, setExpense] = useState(false);
 
   const generateID = () => Math.round(Math.random() * 1000);
+  const { t } = useTranslation();
 
   const handleSave = () => {
     if (!desc || !amount) {
-      alert("Informe a descrição e o valor!");
+      alert(t("form.alertDescriptionValue"));
       return;
     } else if (amount <= 0) {
-      alert("O valor tem que ser positivo!");
+      alert(t("form.alertPositiveValue"));
       return;
     }
 
@@ -60,11 +62,11 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     <>
       <C.Container>
         <C.InputContent>
-          <C.Label>Descrição</C.Label>
+          <C.Label>{t("form.description")}</C.Label>
           <C.Input value={desc} onChange={(e) => setDesc(e.target.value)} />
         </C.InputContent>
         <C.InputContent>
-          <C.Label>Valor</C.Label>
+          <C.Label>{t("form.value")}</C.Label>
           <C.Input
             value={displayAmount ? `R$ ${displayAmount}` : ""}
             type="text"
@@ -79,16 +81,16 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
             name="group1"
             onChange={() => setExpense(!isExpense)}
           />
-          <C.Label htmlFor="rIncome">Entrada</C.Label>
+          <C.Label htmlFor="rIncome">{t("form.income")}</C.Label>
           <C.Input
             type="radio"
             id="rExpenses"
             name="group1"
             onChange={() => setExpense(!isExpense)}
           />
-          <C.Label htmlFor="rExpenses">Saída</C.Label>
+          <C.Label htmlFor="rExpenses">{t("form.expense")}</C.Label>
         </C.RadioGroup>
-        <C.Button onClick={handleSave}>ADICIONAR</C.Button>
+        <C.Button onClick={handleSave}>{t("form.add")}</C.Button>
       </C.Container>
       <Grid itens={transactionsList} setItens={setTransactionsList} />
     </>

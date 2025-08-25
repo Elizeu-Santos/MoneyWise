@@ -6,21 +6,23 @@ import {
   FaRegArrowAltCircleDown,
   FaDollarSign,
 } from "react-icons/fa";
+import { useTranslation } from "../../i18n";
 
 const Resume = ({ income, expense, total }) => {
+  const { t } = useTranslation();
   return (
     <C.Container>
       <ResumeItem
-        title="Entradas"
+        title={t("resume.income")}
         Icon={FaRegArrowAltCircleUp}
         value={income}
       />
       <ResumeItem
-        title="Saídas"
+        title={t("resume.expense")}
         Icon={FaRegArrowAltCircleDown}
         value={expense}
       />
-      <ResumeItem title="Total" Icon={FaDollarSign} value={total} />
+      <ResumeItem title={t("resume.total")} Icon={FaDollarSign} value={total} />
     </C.Container>
   );
 };
