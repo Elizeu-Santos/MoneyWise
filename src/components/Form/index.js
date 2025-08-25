@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Grid from "../Grid";
 import * as C from "./styles";
 
 const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
@@ -12,7 +13,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     if (!desc || !amount) {
       alert("Informe a descrição e o valor!");
       return;
-    } else if (amount < 1) {
+    } else if (amount <= 0) {
       alert("O valor tem que ser positivo!");
       return;
     }
@@ -20,7 +21,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     const transaction = {
       id: generateID(),
       desc: desc,
-      amount: amount,
+      amount: parseFloat(amount), // Convertendo para número
       expense: isExpense,
     };
 
@@ -28,6 +29,30 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
 
     setDesc("");
     setAmount("");
+  };
+
+  const formatCurrency = (value) => {
+    const cleaned = value.replace(/\D/g, "");
+    const number = parseFloat(cleaned) / 100;
+    return number.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  };
+
+  const handleAmountChange = (e) => {
+    const inputValue = e.target.value;
+    // Removendo formatação e mantendo apenas números
+    const cleaned = inputValue.replace(/\D/g, "");
+    const number = parseFloat(cleaned) / 100;
+    
+    if (!isNaN(number)) {
+      setAmount(number); // Armazenando o valor numérico
+    } else {
+      setAmount("");
+    }
+  };
+
+  const formatDisplayValue = (value) => {
+    if (!value) return "";
+    return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   };
 
   return (
@@ -40,9 +65,10 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         <C.InputContent>
           <C.Label>Valor</C.Label>
           <C.Input
-            value={amount}
-            type="number"
-            onChange={(e) => setAmount(e.target.value)}
+            value={formatDisplayValue(amount)}
+            type="text"
+            onChange={handleAmountChange}
+            placeholder="R$ 0,00"
           />
         </C.InputContent>
         <C.RadioGroup>
@@ -64,6 +90,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         </C.RadioGroup>
         <C.Button onClick={handleSave}>ADICIONAR</C.Button>
       </C.Container>
+      <Grid itens={transactionsList} setItens={setTransactionsList} />
     </>
   );
 };
