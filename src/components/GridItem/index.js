@@ -17,10 +17,30 @@ const GridItem = ({ item, onDelete }) => {
         });
   };
 
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "-";
+    try {
+      const date = new Date(timestamp);
+      if (isNaN(date.getTime())) return "-";
+      
+      return date.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }) + " " + date.toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch (error) {
+      return "-";
+    }
+  };
+
   return (
     <C.Tr>
       <C.Td>{item.desc}</C.Td>
       <C.Td>{formatValue(item.amount)}</C.Td>
+      <C.Td>{formatDate(item.timestamp)}</C.Td>
       <C.Td alignCenter>
         {item.expense ? (
           <FaRegArrowAltCircleDown color="red" />

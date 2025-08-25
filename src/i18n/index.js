@@ -25,9 +25,19 @@ const translations = {
     grid: {
       description: "Descrição",
       amount: "Valor",
+      date: "Data/Hora",
       type: "Tipo",
       more: "Ver mais",
       remaining: "restantes",
+    },
+    dateFilter: {
+      title: "Filtrar por Período",
+      startDate: "Data Inicial",
+      endDate: "Data Final",
+      apply: "Aplicar Filtro",
+      clear: "Limpar Filtro",
+      invalidDateRange: "A data inicial não pode ser maior que a data final!",
+      bothDatesRequired: "Por favor, preencha ambas as datas!",
     }
   },
   en: {
@@ -54,9 +64,19 @@ const translations = {
     grid: {
       description: "Description",
       amount: "Amount",
+      date: "Date/Time",
       type: "Type",
       more: "See more",
       remaining: "remaining",
+    },
+    dateFilter: {
+      title: "Filter by Period",
+      startDate: "Start Date",
+      endDate: "End Date",
+      apply: "Apply Filter",
+      clear: "Clear Filter",
+      invalidDateRange: "Start date cannot be greater than end date!",
+      bothDatesRequired: "Please fill in both dates!",
     }
   },
   es: {
@@ -83,9 +103,19 @@ const translations = {
     grid: {
       description: "Descripción",
       amount: "Valor",
+      date: "Fecha/Hora",
       type: "Tipo",
       more: "Ver más",
       remaining: "restantes",
+    },
+    dateFilter: {
+      title: "Filtrar por Período",
+      startDate: "Fecha Inicial",
+      endDate: "Fecha Final",
+      apply: "Aplicar Filtro",
+      clear: "Limpiar Filtro",
+      invalidDateRange: "¡La fecha inicial no puede ser mayor que la fecha final!",
+      bothDatesRequired: "¡Por favor, complete ambas fechas!",
     }
   },
   fr: {
@@ -112,9 +142,19 @@ const translations = {
     grid: {
       description: "Description",
       amount: "Montant",
+      date: "Date/Heure",
       type: "Type",
       more: "Voir plus",
       remaining: "restants",
+    },
+    dateFilter: {
+      title: "Filtrer par Période",
+      startDate: "Date de Début",
+      endDate: "Date de Fin",
+      apply: "Appliquer le Filtre",
+      clear: "Effacer le Filtre",
+      invalidDateRange: "La date de début ne peut pas être supérieure à la date de fin !",
+      bothDatesRequired: "Veuillez remplir les deux dates !",
     }
   },
 };

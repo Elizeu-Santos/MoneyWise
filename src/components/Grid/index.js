@@ -25,8 +25,9 @@ const Grid = ({ itens, setItens }) => {
       <C.Table>
         <C.Thead>
           <C.Tr>
-            <C.Th width={40}>{t("grid.description")}</C.Th>
-            <C.Th width={40}>{t("grid.amount")}</C.Th>
+            <C.Th width={30}>{t("grid.description")}</C.Th>
+            <C.Th width={25}>{t("grid.amount")}</C.Th>
+            <C.Th width={15}>{t("grid.date")}</C.Th>
             <C.Th width={10} alignCenter>
               {t("grid.type")}
             </C.Th>

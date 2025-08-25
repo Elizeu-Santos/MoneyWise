@@ -13,6 +13,28 @@ const App = () => {
   const [expense, setExpense] = useState(0);
   const [total, setTotal] = useState(0);
 
+  // Migrar dados existentes para incluir timestamp
+  useEffect(() => {
+    if (transactionsList.length > 0) {
+      const needsMigration = transactionsList.some(item => !item.timestamp);
+      
+      if (needsMigration) {
+        const migratedTransactions = transactionsList.map(item => {
+          if (!item.timestamp) {
+            return {
+              ...item,
+              timestamp: new Date().toISOString() // Usar data atual para itens existentes
+            };
+          }
+          return item;
+        });
+        
+        setTransactionsList(migratedTransactions);
+        localStorage.setItem("transactions", JSON.stringify(migratedTransactions));
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const amountExpense = transactionsList
       .filter((item) => item.expense)

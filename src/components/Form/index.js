@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "../Grid";
+import DateFilter from "../DateFilter";
 import * as C from "./styles";
 import { useTranslation } from "../../i18n";
 
@@ -8,9 +9,25 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
   const [amount, setAmount] = useState("");
   const [displayAmount, setDisplayAmount] = useState("");
   const [isExpense, setExpense] = useState(false);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [activeFilter, setActiveFilter] = useState(null);
 
   const generateID = () => Math.round(Math.random() * 1000);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (activeFilter) {
+      const filtered = transactionsList.filter(transaction => {
+        if (!transaction.timestamp) return false;
+        const transactionDate = new Date(transaction.timestamp);
+        return transactionDate >= activeFilter.startDate && 
+               transactionDate <= activeFilter.endDate;
+      });
+      setFilteredTransactions(filtered);
+    } else {
+      setFilteredTransactions(transactionsList);
+    }
+  }, [transactionsList, activeFilter]);
 
   const handleSave = () => {
     if (!desc || !amount) {
@@ -26,6 +43,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
       desc: desc,
       amount: parseFloat(amount),
       expense: isExpense,
+      timestamp: new Date().toISOString(), // Adicionando timestamp
     };
 
     handleAdd(transaction);
@@ -56,6 +74,10 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     
     setDisplayAmount(formattedValue);
     setAmount(number);
+  };
+
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
   };
 
   return (
@@ -92,7 +114,10 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         </C.RadioGroup>
         <C.Button onClick={handleSave}>{t("form.add")}</C.Button>
       </C.Container>
-      <Grid itens={transactionsList} setItens={setTransactionsList} />
+      
+      <DateFilter onFilterChange={handleFilterChange} />
+      
+      <Grid itens={filteredTransactions} setItens={setTransactionsList} />
     </>
   );
 };
