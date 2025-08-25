@@ -5,6 +5,7 @@ import * as C from "./styles";
 const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
   const [desc, setDesc] = useState("");
   const [amount, setAmount] = useState("");
+  const [displayAmount, setDisplayAmount] = useState("");
   const [isExpense, setExpense] = useState(false);
 
   const generateID = () => Math.round(Math.random() * 1000);
@@ -21,7 +22,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     const transaction = {
       id: generateID(),
       desc: desc,
-      amount: parseFloat(amount), // Convertendo para número
+      amount: parseFloat(amount),
       expense: isExpense,
     };
 
@@ -29,30 +30,30 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
 
     setDesc("");
     setAmount("");
-  };
-
-  const formatCurrency = (value) => {
-    const cleaned = value.replace(/\D/g, "");
-    const number = parseFloat(cleaned) / 100;
-    return number.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    setDisplayAmount("");
   };
 
   const handleAmountChange = (e) => {
     const inputValue = e.target.value;
-    // Removendo formatação e mantendo apenas números
-    const cleaned = inputValue.replace(/\D/g, "");
-    const number = parseFloat(cleaned) / 100;
     
-    if (!isNaN(number)) {
-      setAmount(number); // Armazenando o valor numérico
-    } else {
+    const cleaned = inputValue.replace(/R\$\s*/g, '').replace(/\D/g, '');
+    
+    if (cleaned === "") {
+      setDisplayAmount("");
       setAmount("");
+      return;
     }
-  };
-
-  const formatDisplayValue = (value) => {
-    if (!value) return "";
-    return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    
+    const numberInCents = parseInt(cleaned);
+    const number = numberInCents / 100;
+    
+    const formattedValue = number.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    
+    setDisplayAmount(formattedValue);
+    setAmount(number);
   };
 
   return (
@@ -65,10 +66,9 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         <C.InputContent>
           <C.Label>Valor</C.Label>
           <C.Input
-            value={formatDisplayValue(amount)}
+            value={displayAmount ? `R$ ${displayAmount}` : ""}
             type="text"
             onChange={handleAmountChange}
-            placeholder="R$ 0,00"
           />
         </C.InputContent>
         <C.RadioGroup>

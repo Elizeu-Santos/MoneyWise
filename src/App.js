@@ -27,9 +27,9 @@ const App = () => {
 
     const total = Math.abs(income - expense).toFixed(2);
 
-    setIncome(`R$ ${income}`);
-    setExpense(`R$ ${expense}`);
-    setTotal(`${Number(income) < Number(expense) ? "-" : ""}R$ ${total}`);
+    setIncome(Number(income));
+    setExpense(Number(expense));
+    setTotal(Number(income) < Number(expense) ? -Number(total) : Number(total));
   }, [transactionsList]);
 
   const handleAdd = (transaction) => {

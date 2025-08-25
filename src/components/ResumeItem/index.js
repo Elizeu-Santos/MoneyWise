@@ -3,22 +3,13 @@ import * as C from "./styles";
 
 const ResumeItem = ({ title, Icon, value }) => {
   const formatCurrency = (value) => {
-    if (typeof value === 'string' && value.includes('R$')) {
-      const numericValue = parseFloat(value.replace('R$', '').replace(/\./g, '').replace(',', '.'));
-      if (!isNaN(numericValue)) {
-        return numericValue.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-      }
+    if (typeof value === 'number') {
+      return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     }
     
-    if (typeof value === 'number' || !isNaN(parseFloat(value))) {
-      return parseFloat(value).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-    }
-    
-    if (typeof value === 'string' && value.startsWith('-')) {
-      const numericValue = parseFloat(value.replace('-R$', '').replace(/\./g, '').replace(',', '.'));
-      if (!isNaN(numericValue)) {
-        return `-${numericValue.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`;
-      }
+    const numValue = parseFloat(value);
+    if (!isNaN(numValue)) {
+      return numValue.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     }
     
     return value;
