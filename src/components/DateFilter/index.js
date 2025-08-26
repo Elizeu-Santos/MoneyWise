@@ -34,7 +34,7 @@ const DateFilter = ({ onFilterChange }) => {
 
   return (
     <C.Container>
-      <C.Title>Filtrar por data:</C.Title>
+      <C.Title>{t("dateFilter.filterByDate")}:</C.Title>
       <C.DateInputGroup>
         <C.DateInput
           type="date"

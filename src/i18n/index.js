@@ -32,6 +32,7 @@ const translations = {
     },
     dateFilter: {
       title: "Filtrar por Período",
+      filterByDate: "Filtrar por Data",
       startDate: "Data Inicial",
       endDate: "Data Final",
       apply: "Aplicar Filtro",
@@ -71,6 +72,7 @@ const translations = {
     },
     dateFilter: {
       title: "Filter by Period",
+      filterByDate: "Filter by Date",
       startDate: "Start Date",
       endDate: "End Date",
       apply: "Apply Filter",
@@ -110,6 +112,7 @@ const translations = {
     },
     dateFilter: {
       title: "Filtrar por Período",
+      filterByDate: "Filtrar por Fecha",
       startDate: "Fecha Inicial",
       endDate: "Fecha Final",
       apply: "Aplicar Filtro",
@@ -149,6 +152,7 @@ const translations = {
     },
     dateFilter: {
       title: "Filtrer par Période",
+      filterByDate: "Filtrer par Date",
       startDate: "Date de Début",
       endDate: "Date de Fin",
       apply: "Appliquer le Filtre",
