@@ -44,13 +44,15 @@ export const DateInputGroup = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
-  min-width: 220px;
+  gap: 6px; 
+  min-width: auto; 
 `;
 
 export const Label = styled.label`
   font-size: 14px;
+  font-weight: 500;
   color: #333;
+  white-space: nowrap; 
 `;
 
 export const DateInput = styled.input`
@@ -77,6 +79,7 @@ export const ButtonGroup = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
+  margin-left: 15px;
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -106,6 +109,7 @@ export const ClearButton = styled.button`
   color: white;
   background-color: #ccc;
   font-size: 15px;
+  margin-left: 15px;
   
   &:hover {
     background-color: #bbb;
