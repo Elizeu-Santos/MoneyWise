@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Grid from "../Grid";
 import DateFilter from "../DateFilter";
+import Toast from "../Toast";
 import * as C from "./styles";
 import { useTranslation } from "../../i18n";
 
@@ -11,6 +12,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
   const [isExpense, setExpense] = useState(false);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [activeFilter, setActiveFilter] = useState(null);
+  const [toastMessage, setToastMessage] = useState("");
 
   const generateID = () => Math.round(Math.random() * 1000);
   const { t } = useTranslation();
@@ -43,7 +45,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
       desc: desc,
       amount: parseFloat(amount),
       expense: isExpense,
-      timestamp: new Date().toISOString(), // Adicionando timestamp
+      timestamp: new Date().toISOString(),
     };
 
     handleAdd(transaction);
@@ -51,27 +53,24 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     setDesc("");
     setAmount("");
     setDisplayAmount("");
+
+    setToastMessage(`${desc} ${t("form.addedSuccess")}`);
   };
 
   const handleAmountChange = (e) => {
     const inputValue = e.target.value;
-    
     const cleaned = inputValue.replace(/R\$\s*/g, '').replace(/\D/g, '');
-    
     if (cleaned === "") {
       setDisplayAmount("");
       setAmount("");
       return;
     }
-    
     const numberInCents = parseInt(cleaned);
     const number = numberInCents / 100;
-    
     const formattedValue = number.toLocaleString('pt-BR', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
-    
     setDisplayAmount(formattedValue);
     setAmount(number);
   };
@@ -116,8 +115,11 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
       </C.Container>
       
       <DateFilter onFilterChange={handleFilterChange} />
-      
       <Grid itens={filteredTransactions} setItens={setTransactionsList} />
+
+      {toastMessage && (
+        <Toast message={toastMessage} onClose={() => setToastMessage("")} />
+      )}
     </>
   );
 };

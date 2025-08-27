@@ -16,6 +16,7 @@ const translations = {
       add: "ADICIONAR",
       alertDescriptionValue: "Informe a descrição e o valor!",
       alertPositiveValue: "O valor tem que ser positivo!",
+      addedSuccess: "adicionado com sucesso!",
     },
     resume: {
       income: "Entradas",
@@ -56,6 +57,7 @@ const translations = {
       add: "ADD",
       alertDescriptionValue: "Enter description and amount!",
       alertPositiveValue: "Amount must be positive!",
+      addedSuccess: "added successfully!",
     },
     resume: {
       income: "Income",
@@ -96,6 +98,7 @@ const translations = {
       add: "AGREGAR",
       alertDescriptionValue: "¡Informe la descripción y el valor!",
       alertPositiveValue: "¡El valor debe ser positivo!",
+      addedSuccess: "agregado con éxito!",
     },
     resume: {
       income: "Entradas",
@@ -136,6 +139,7 @@ const translations = {
       add: "AJOUTER",
       alertDescriptionValue: "Renseignez la description et le montant !",
       alertPositiveValue: "Le montant doit être positif !",
+      addedSuccess: "ajouté avec succès !",
     },
     resume: {
       income: "Entrées",
