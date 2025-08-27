@@ -3,15 +3,9 @@ import GridItem from "../GridItem";
 import * as C from "./styles";
 import { useTranslation } from "../../i18n";
 
-const Grid = ({ itens, setItens }) => {
+const Grid = ({ itens, setItens, onDelete }) => {
   const [visibleItems, setVisibleItems] = useState(10);
   const { t } = useTranslation();
-
-  const onDelete = (ID) => {
-    const newArray = itens.filter((transaction) => transaction.id !== ID);
-    setItens(newArray);
-    localStorage.setItem("transactions", JSON.stringify(newArray));
-  };
 
   const loadMoreItems = () => {
     setVisibleItems(prev => prev + 10);
@@ -28,9 +22,7 @@ const Grid = ({ itens, setItens }) => {
             <C.Th width={30}>{t("grid.description")}</C.Th>
             <C.Th width={25}>{t("grid.amount")}</C.Th>
             <C.Th width={15}>{t("grid.date")}</C.Th>
-            <C.Th width={10} alignCenter>
-              {t("grid.type")}
-            </C.Th>
+            <C.Th width={10} alignCenter>{t("grid.type")}</C.Th>
             <C.Th width={10}></C.Th>
           </C.Tr>
         </C.Thead>

@@ -22,7 +22,6 @@ const GridItem = ({ item, onDelete }) => {
     try {
       const date = new Date(timestamp);
       if (isNaN(date.getTime())) return "-";
-      
       return date.toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
@@ -49,7 +48,7 @@ const GridItem = ({ item, onDelete }) => {
         )}
       </C.Td>
       <C.Td alignCenter>
-        <FaTrash onClick={() => onDelete(item.id)} />
+        <FaTrash onClick={() => onDelete(item.id, item.desc)} style={{ cursor: "pointer" }} />
       </C.Td>
     </C.Tr>
   );

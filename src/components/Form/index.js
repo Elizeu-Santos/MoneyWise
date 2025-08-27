@@ -12,7 +12,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
   const [isExpense, setExpense] = useState(false);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [activeFilter, setActiveFilter] = useState(null);
-  const [toastMessage, setToastMessage] = useState("");
+  const [toastMessage, setToastMessage] = useState(null); // Agora será objeto { text, type }
 
   const generateID = () => Math.round(Math.random() * 1000);
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
       const filtered = transactionsList.filter(transaction => {
         if (!transaction.timestamp) return false;
         const transactionDate = new Date(transaction.timestamp);
-        return transactionDate >= activeFilter.startDate && 
+        return transactionDate >= activeFilter.startDate &&
                transactionDate <= activeFilter.endDate;
       });
       setFilteredTransactions(filtered);
@@ -31,6 +31,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     }
   }, [transactionsList, activeFilter]);
 
+  // Adiciona transação
   const handleSave = () => {
     if (!desc || !amount) {
       alert(t("form.alertDescriptionValue"));
@@ -54,9 +55,19 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     setAmount("");
     setDisplayAmount("");
 
-    setToastMessage(`${desc} ${t("form.addedSuccess")}`);
+    setToastMessage({ text: `${desc} ${t("form.addedSuccess")}`, type: "success" });
   };
 
+  // Remove transação
+  const handleDelete = (id, desc) => {
+    const updatedList = transactionsList.filter(item => item.id !== id);
+    setTransactionsList(updatedList);
+    localStorage.setItem("transactions", JSON.stringify(updatedList));
+
+    setToastMessage({ text: `${desc} ${t("form.deletedSuccess")}`, type: "error" });
+  };
+
+  // Formata valor
   const handleAmountChange = (e) => {
     const inputValue = e.target.value;
     const cleaned = inputValue.replace(/R\$\s*/g, '').replace(/\D/g, '');
@@ -115,10 +126,19 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
       </C.Container>
       
       <DateFilter onFilterChange={handleFilterChange} />
-      <Grid itens={filteredTransactions} setItens={setTransactionsList} />
+
+      <Grid 
+        itens={filteredTransactions} 
+        setItens={setTransactionsList} 
+        onDelete={handleDelete} 
+      />
 
       {toastMessage && (
-        <Toast message={toastMessage} onClose={() => setToastMessage("")} />
+        <Toast 
+          message={toastMessage.text} 
+          type={toastMessage.type} 
+          onClose={() => setToastMessage(null)} 
+        />
       )}
     </>
   );

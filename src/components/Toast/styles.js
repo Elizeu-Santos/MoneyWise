@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 
-// Animação de entrada do toast
 const slideIn = keyframes`
   from {
     opacity: 0;
@@ -16,7 +15,8 @@ export const ToastContainer = styled.div`
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #4CAF50;
+  background-color: ${(props) =>
+    props.type === "success" ? "#4CAF50" : props.type === "error" ? "#F44336" : "#333"};
   color: white;
   padding: 12px 20px;
   border-radius: 8px;
