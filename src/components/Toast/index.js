@@ -10,7 +10,6 @@ const Toast = ({ message, duration = 3000, onClose, type = "success" }) => {
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
-  // IMPORTANTE: passar type para o styled component
   return <ToastContainer type={type}>{message}</ToastContainer>;
 };
 
