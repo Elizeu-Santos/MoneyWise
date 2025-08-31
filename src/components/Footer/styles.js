@@ -10,4 +10,6 @@ export const FooterContainer = styled.footer`
   position: static;
   width: 100%;
   margin-top: auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
 `;
