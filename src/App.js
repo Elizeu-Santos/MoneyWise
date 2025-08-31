@@ -34,7 +34,7 @@ const App = () => {
         localStorage.setItem("transactions", JSON.stringify(migratedTransactions));
       }
     }
-  }, []);
+  }, [transactionsList]);
 
   useEffect(() => {
     const amountExpense = transactionsList
