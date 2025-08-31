@@ -24,7 +24,7 @@ const DateFilter = ({ onFilterChange }) => {
       startDate: new Date(startDate + "T00:00:00"),
       endDate: new Date(endDate + "T23:59:59"),
     });
-  }, []);
+  }, [startDate, endDate, onFilterChange]);
 
   const handleApplyFilter = () => {
     if (startDate && endDate) {

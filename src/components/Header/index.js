@@ -41,7 +41,7 @@ const Header = () => {
         }
     };
 
-    const { t, setLocale, locale } = useTranslation();
+    const { t, setLocale } = useTranslation();
 
     return (
         <C.Container>
