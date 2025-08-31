@@ -41,6 +41,9 @@ const translations = {
       clear: "Limpar Filtro",
       invalidDateRange: "A data inicial não pode ser maior que a data final!",
       bothDatesRequired: "Por favor, preencha ambas as datas!",
+    },
+    footer: {
+      text: "Desenvolvido por Elizeu Santos",
     }
   },
   en: {
@@ -83,6 +86,9 @@ const translations = {
       clear: "Clear Filter",
       invalidDateRange: "Start date cannot be greater than end date!",
       bothDatesRequired: "Please fill in both dates!",
+    },
+    footer: {
+      text: "Developed by Elizeu Santos",
     }
   },
   es: {
@@ -125,6 +131,9 @@ const translations = {
       clear: "Limpiar Filtro",
       invalidDateRange: "¡La fecha inicial no puede ser mayor que la fecha final!",
       bothDatesRequired: "¡Por favor, complete ambas fechas!",
+    },
+    footer: {
+      text: "Desarrollado por Elizeu Santos",
     }
   },
   fr: {
@@ -167,6 +176,9 @@ const translations = {
       clear: "Effacer le Filtre",
       invalidDateRange: "La date de début ne peut pas être supérieure à la date de fin !",
       bothDatesRequired: "Veuillez remplir les deux dates !",
+    },
+    footer: {
+      text: "Développé par Elizeu Santos",
     }
   },
 };
